@@ -40,6 +40,6 @@ const findCommon = (array) => {
   return sum !== 0 ? sum : 'invalid input';
 };
 
-console.log('The answer is: ', findCommon(groupArr));
+console.log('The answer for task 1 is: ', findSum(groupArr));
 
-//console.log(findSum(groupArr));
+console.log('The answer for task 2 is: ', findCommon(groupArr));
