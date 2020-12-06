@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const input = fs.readFileSync('./input.txt', 'utf-8');
 
-const inputSplit = input.split(/\n\n/);
+const inputSplit = input.trim().split(/\n\n/);
 
 const groupArr = inputSplit.map((value) => {
   return value.split(/\n/);
@@ -21,32 +21,25 @@ const findSum = (array) => {
 
 const findCommon = (array) => {
   let sum = 0;
-
   array.forEach((group) => {
-    const questionSplit = group.map((person) => {
-      return person.split('');
+    const grpSize = group.length;
+    const grpJoin = group.flat().join('');
+    const allQuestions = grpJoin.split('');
+    const unique = [...new Set(allQuestions)];
+    let counts = {};
+    allQuestions.forEach((x) => {
+      counts[x] = (counts[x] || 0) + 1;
     });
 
-    let unique = [...new Set(questionSplit.flat())];
-    // console.log(unique);
-
-    let commonCount = 0;
-
-    unique.forEach((question) => {
-      let isCommon = false;
-      for (let i = 0; i < questionSplit.length; i++) {
-        if (questionSplit[i].includes(question)) {
-          isCommon = true;
-        } else {
-          isCommon = false;
-        }
+    unique.forEach((value) => {
+      if (counts[value] === grpSize) {
+        sum++;
       }
-
-      isCommon ? commonCount++ : (commonCount += 0);
     });
-    sum += commonCount;
   });
-  return sum;
+  return sum !== 0 ? sum : 'invalid input';
 };
 
-console.log(findCommon(groupArr));
+console.log('The answer is: ', findCommon(groupArr));
+
+//console.log(findSum(groupArr));

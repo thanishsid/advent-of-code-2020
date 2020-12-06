@@ -4,6 +4,8 @@ let input = fs.readFileSync('./input.txt', 'utf-8');
 
 let inputSplit = input.split(/\n\n/);
 
+console.log(inputSplit);
+
 let inputArr = inputSplit.map((value) => {
   let batch = value.split(/\s/);
   let fieldObj = {};
