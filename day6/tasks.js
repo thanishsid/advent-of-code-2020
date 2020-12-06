@@ -2,17 +2,17 @@ const fs = require('fs');
 
 const input = fs.readFileSync('./input.txt', 'utf-8');
 
-const inputSplit = input.trim().split(/\n\n/);
-
-const groupArr = inputSplit.map((value) => {
-  return value.split(/\n/);
-});
+const groupArr = input
+  .trim()
+  .split(/\n\n/)
+  .map((value) => {
+    return value.split(/\n/);
+  });
 
 const findSum = (array) => {
   let sum = 0;
   array.forEach((group) => {
-    const grpJoin = group.join('');
-    const allQuestions = grpJoin.split('');
+    const allQuestions = group.join('').split('');
     const unique = [...new Set(allQuestions)];
     sum += unique.length;
   });
@@ -23,8 +23,7 @@ const findCommon = (array) => {
   let sum = 0;
   array.forEach((group) => {
     const grpSize = group.length;
-    const grpJoin = group.flat().join('');
-    const allQuestions = grpJoin.split('');
+    const allQuestions = group.flat().join('').split('');
     const unique = [...new Set(allQuestions)];
     let counts = {};
     allQuestions.forEach((x) => {
